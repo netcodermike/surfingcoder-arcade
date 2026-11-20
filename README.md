@@ -1,6 +1,6 @@
 # SurfingCoder Arcade
 
-[Play Barrel Patrol](https://surfingcoder.com/arcade/), an original formation shooter set on a sunset reef break. Ride the moving crests and throw surfboards at mantas, squid, puffers, and reef fish. Dodge diving creatures and stinging bubbles. Three wipeouts end the ride.
+[Play Barrel Patrol](https://surfingcoder.com/arcade/), an original formation shooter set on a sunset reef break. Ride the moving crests and throw surfboards at mantas, squid, clawed crabs, and sharks. Dodge diving creatures and stinging bubbles. Three wipeouts end the ride.
 
 ![Two surfers throwing boards in Barrel Patrol](docs/arcade.webp)
 
