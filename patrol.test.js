@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import {createGame, startWave, stageName, update, waterline, WIDTH} from './patrol.js'
 
-const idle = [{direction: 0, fire: false}]
+const idle = {direction: 0, fire: false}
 const step = 1 / 120
 const tick = (game, input = idle) => update(game, input, step, () => 0)
 const advance = (game, frames, input) => {
@@ -13,7 +13,7 @@ test('a board scores once and clearing the reef advances to the next set', () =>
   const game = createGame()
   const [target] = game.foes
   game.foes = [target]
-  game.shots = [{x: target.x, y: target.y, owner: 0, age: 0}]
+  game.shots = [{x: target.x, y: target.y, age: 0}]
   assert.deepEqual(tick(game), ['hit', 'wave'])
   assert.equal(game.score, 560)
   assert.equal(game.result, 'Reef cleared')
@@ -25,49 +25,32 @@ test('a board scores once and clearing the reef advances to the next set', () =>
 
 test('surfer rides the crest and changes direction and lean after a turn', () => {
   const game = createGame()
-  const [surfer] = game.surfers
-  advance(game, 15, [{direction: 1}])
+  const {surfer} = game
+  advance(game, 15, {direction: 1})
   assert.ok(surfer.x > WIDTH / 2)
   assert.equal(surfer.facing, 1)
   assert.ok(surfer.lean > .5)
-  assert.equal(surfer.y, waterline(surfer.x, game.oceanTime, surfer.lane))
-  advance(game, 15, [{direction: -1}])
+  assert.equal(surfer.y, waterline(surfer.x, game.oceanTime))
+  advance(game, 15, {direction: -1})
   assert.equal(surfer.facing, -1)
   assert.ok(surfer.lean < -.5)
-  assert.equal(surfer.y, waterline(surfer.x, game.oceanTime, surfer.lane))
+  assert.equal(surfer.y, waterline(surfer.x, game.oceanTime))
 })
 
-test('tandem surfers throw two boards and hold spacing at both edges', () => {
-  const game = createGame('tandem')
-  const [left, right] = game.surfers
-  assert.deepEqual(tick(game, [{direction: 1, fire: true}]), ['throw'])
-  assert.deepEqual(game.shots.map(shot => shot.owner), [0, 1])
-  const spacing = right.x - left.x
-  advance(game, 145, [{direction: 1}])
-  assert.equal(right.x, WIDTH - 31)
-  assert.equal(right.x - left.x, spacing)
-  advance(game, 190, [{direction: -1}])
-  assert.equal(left.x, 31)
-  assert.equal(right.x - left.x, spacing)
-})
-
-test('co-op steering and throws are independent with shared wipeouts', () => {
-  const game = createGame('coop')
-  const [first, second] = game.surfers
-  const before = [first.x, second.x]
-  tick(game, [{direction: 1}, {direction: -1, fire: true}])
-  assert.ok(first.x > before[0])
-  assert.ok(second.x < before[1])
-  assert.deepEqual(game.shots.map(shot => shot.owner), [1])
-  assert.ok(first.y < second.y)
-  game.enemyShots.push({x: second.x, y: second.y, vx: 0})
-  assert.ok(tick(game).includes('damage'))
-  assert.equal(game.lives, 2)
+test('one throw starts one board and movement stops at each edge', () => {
+  const game = createGame()
+  assert.deepEqual(tick(game, {direction: 1, fire: true}), ['throw'])
+  assert.equal(game.shots.length, 1)
+  assert.equal(game.shots[0].x, game.surfer.x)
+  advance(game, 145, {direction: 1})
+  assert.equal(game.surfer.x, WIDTH - 31)
+  advance(game, 190, {direction: -1})
+  assert.equal(game.surfer.x, 31)
 })
 
 test('three hits end play and a shield prevents immediate damage', () => {
   const game = createGame()
-  const placeShot = () => game.enemyShots.push({...game.surfers[0], vx: 0})
+  const placeShot = () => game.enemyShots.push({...game.surfer, vx: 0})
   placeShot()
   assert.deepEqual(tick(game), ['damage'])
   assert.equal(game.lives, 2)
@@ -81,7 +64,7 @@ test('three hits end play and a shield prevents immediate damage', () => {
     assert.equal(game.lives, lives)
   }
   assert.equal(game.over, true)
-  assert.deepEqual(tick(game, [{direction: 1, fire: true}]), [])
+  assert.deepEqual(tick(game, {direction: 1, fire: true}), [])
 })
 
 test('every third set alternates bonus patterns and missed shells expire safely', () => {
@@ -102,14 +85,14 @@ test('every third set alternates bonus patterns and missed shells expire safely'
 })
 
 test('the last catch of a perfect bonus set grants the extra points once', () => {
-  const game = createGame('tandem')
+  const game = createGame()
   game.wave = 6
   startWave(game)
   game.shells = 20
   const target = game.foes[0]
   game.foes = [target]
   game.clock = 2
-  game.shots = [{x: 240, y: 120, owner: 0, age: 0}]
+  game.shots = [{x: 240, y: 120, age: 0}]
   assert.deepEqual(tick(game), ['shell', 'wave'])
   assert.equal(game.shells, 21)
   assert.equal(game.score, 2250)

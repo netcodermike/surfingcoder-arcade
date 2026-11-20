@@ -14,17 +14,9 @@ Wipeout recording by kirbydx, distributed under CC0. [Original recording](https:
 
 [Play Barrel Patrol](https://surfingcoder.com/arcade/barrel-patrol/), an original formation shooter set on a sunset reef break. Ride the moving crests and throw surfboards at mantas, squid, clawed crabs, and sharks. Dodge diving creatures and stinging bubbles. Three wipeouts end the ride.
 
-![Two surfers throwing boards in Barrel Patrol](docs/barrel-patrol.webp)
+![A surfer throwing a board in Barrel Patrol](docs/barrel-patrol.webp)
 
-### Ride modes
-
-| Mode | Controls |
-| --- | --- |
-| **Solo** | Arrow keys or A / D to steer, Space to throw. |
-| **Tandem** | Same controls. One player steers two surfers and throws both boards together. |
-| **Local co-op** | Surfer 1 uses A / D and F or Space. Surfer 2 uses the arrows and slash or numpad zero. Score and lives are shared. |
-
-Press P or Escape to pause. On touchscreens, hold the buttons below the playfield. Choose a ride mode before starting. Sound is on by default and can be muted in the arcade toolbar. Each mode keeps its own best score on this device.
+Use the arrow keys or A / D to steer and hold Space to throw boards. Press P or Escape to pause. On touchscreens, hold the buttons below the playfield. Sound is on by default and can be muted in the arcade toolbar. Your best score is saved on this device.
 
 ### Bonus sets
 
