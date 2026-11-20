@@ -1,10 +1,22 @@
 # SurfingCoder Arcade
 
-[Open the arcade](https://surfingcoder.com/arcade/) to play **Barrel Patrol**, an original browser shooter inspired by classic formation shooters. Ride a pixel swell, shoot through waves of enemy formations, and dodge diving craft. Clearing a wave awards a bonus. Three hits end a game and your best score is stored on this device.
+[Play Barrel Patrol](https://surfingcoder.com/arcade/), an original formation shooter set on a sunset reef break. Ride the moving crests and throw surfboards at mantas, squid, puffers, and reef fish. Dodge diving creatures and stinging bubbles. Three wipeouts end the ride.
 
-![Barrel Patrol in the SurfingCoder arcade](docs/arcade.webp)
+![Two surfers throwing boards in Barrel Patrol](docs/arcade.webp)
 
-Use Left and Right or A and D to steer. Hold Space to fire. P or Escape pauses. On touchscreens, use the buttons under the screen. Sound starts off and can be enabled in the marquee.
+## Ride modes
+
+| Mode | Controls |
+| --- | --- |
+| **Solo** | Arrow keys or A / D to steer, Space to throw. |
+| **Tandem** | Same controls. One player steers two surfers and throws both boards together. |
+| **Local co-op** | Surfer 1 uses A / D and F or Space. Surfer 2 uses the arrows and slash or numpad zero. Score and lives are shared. |
+
+Press P or Escape to pause. On touchscreens, hold the buttons below the playfield. Choose a ride mode before starting. Each mode keeps its own best score on this device.
+
+## Bonus sets
+
+Every third set is a bonus round. Shell Run sends shells in arcing groups. Glass Barrel sends them in S-shaped paths. Throw a board to catch each shell for 150 points. Catch all 21 for 2,100 more. Bonus sets have no creatures or bubbles that can cost a life.
 
 ## Open a ROM
 
